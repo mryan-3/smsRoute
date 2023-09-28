@@ -26,7 +26,9 @@ async function sendSMS(message, to) {
 
 // USSD route
 router.post('/ussd', (req, res) => {
-    const { text } = req.body;
+    const { text,sessionId,
+        serviceCode,
+        phoneNumber } = req.body;
 
     // Handle USSD requests asynchronously
     async function handleUSSD() {
@@ -42,7 +44,7 @@ router.post('/ussd', (req, res) => {
             try {
                 const smsResponse = await sendSMS(
                     "I'm a lumberjack and it's ok, I work all night and sleep all day",
-                    ['+254743413621']  // Replace with the recipient's phone number
+                    phoneNumber  // Replace with the recipient's phone number
                 );
 
                 console.log(smsResponse);
